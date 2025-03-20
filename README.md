@@ -1,2 +1,0 @@
-# Elite-Gatherings
-A Website
