@@ -139,7 +139,7 @@ const Footer: React.FC = () => {
             <div className="space-y-3">
               <div className="flex items-start">
                 <MapPin size={18} className="mr-2 mt-1 flex-shrink-0" />
-                <p className="text-gray-300">123 Event Plaza, New York, NY 10001</p>
+                <p className="text-gray-300">Hatsingimari,783135</p>
               </div>
               <div className="flex items-center">
                 <Phone size={18} className="mr-2 flex-shrink-0" />
