@@ -1,120 +1,105 @@
-
+// Import React
 import React from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Label } from '@/components/ui/label';
-import { categories } from '@/utils/mockData';
 
-interface EventFormProps {
-  isEditing?: boolean;
-  onSubmit: (event: React.FormEvent) => void;
+// Import components and icons
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Calendar, MapPin, Clock } from 'lucide-react';
+
+// Import routing and data types
+import { Link } from 'react-router-dom';
+import { Event } from '@/utils/mockData';
+
+// Define props interface
+interface EventCardProps {
+  event: Event;
 }
 
-const EventForm: React.FC<EventFormProps> = ({ isEditing = false, onSubmit }) => {
+// Define and export the EventCard component
+const EventCard: React.FC<EventCardProps> = ({ event }) => {
+  // Destructure event properties
+  const { id, title, date, time, location, price, imageUrl, category, capacity, bookedSeats } = event;
+
+  // Format event date to readable format
+  const formattedDate = new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+  // Calculate seat availability percentage
+  const availabilityPercentage = ((capacity - bookedSeats) / capacity) * 100;
+
   return (
-    <form onSubmit={onSubmit} className="space-y-6">
-      <div className="space-y-4">
-        <div>
-          <Label htmlFor="title">Event Title</Label>
-          <Input id="title" placeholder="Enter event title" required />
-        </div>
-        
-        <div>
-          <Label htmlFor="description">Description</Label>
-          <Textarea 
-            id="description" 
-            placeholder="Describe your event" 
-            className="min-h-[120px]" 
-            required 
+    // Card wrapper
+    <Card className="overflow-hidden event-card h-full flex flex-col">
+      {/* Image with link */}
+      <div className="relative">
+        <Link to={`/events/${id}`}>
+          <img
+            src={imageUrl}
+            alt={title}
+            className="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
           />
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <Label htmlFor="date">Date</Label>
-            <Input id="date" type="date" required />
-          </div>
-          <div>
-            <Label htmlFor="time">Time</Label>
-            <Input id="time" type="time" required />
-          </div>
-        </div>
-        
-        <div>
-          <Label htmlFor="location">Location</Label>
-          <Input id="location" placeholder="Event venue or address" required />
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <Label htmlFor="price">Price (₹)</Label>
-            <Input id="price" type="number" min="0" step="0.01" placeholder="0.00" required />
-          </div>
-          <div>
-            <Label htmlFor="category">Category</Label>
-            <Select>
-              <SelectTrigger id="category">
-                <SelectValue placeholder="Select a category" />
-              </SelectTrigger>
-              <SelectContent>
-                {categories.map((category) => (
-                  <SelectItem key={category} value={category}>
-                    {category}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <Label htmlFor="capacity">Total Capacity</Label>
-            <Input id="capacity" type="number" min="1" placeholder="100" required />
-          </div>
-          <div>
-            <Label htmlFor="featured">Featured Event</Label>
-            <Select>
-              <SelectTrigger id="featured">
-                <SelectValue placeholder="Is this a featured event?" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="yes">Yes</SelectItem>
-                <SelectItem value="no">No</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-        
-        <div>
-          <Label htmlFor="image">Event Image</Label>
-          <Input id="image" type="file" className="cursor-pointer" />
-          {isEditing && (
-            <p className="text-sm text-muted-foreground mt-1">
-              Leave empty to keep the current image
-            </p>
-          )}
-        </div>
+        </Link>
+        {/* Event category badge */}
+        <Badge className="absolute top-4 right-4 bg-elite-purple">{category}</Badge>
       </div>
-      
-      <div className="flex justify-end space-x-2 pt-4">
-        <Button type="button" variant="outline">
-          Cancel
+
+      {/* Card content */}
+      <CardContent className="pt-6 flex-grow">
+        {/* Event title */}
+        <Link to={`/events/${id}`}>
+          <h3 className="text-xl font-semibold mb-2 line-clamp-1 hover:text-elite-purple transition-colors">
+            {title}
+          </h3>
+        </Link>
+
+        {/* Event details */}
+        <div className="space-y-3 text-sm text-muted-foreground mt-4">
+          <div className="flex items-center">
+            <Calendar className="h-4 w-4 mr-2 text-elite-purple" />
+            <span>{formattedDate}</span>
+          </div>
+          <div className="flex items-center">
+            <Clock className="h-4 w-4 mr-2 text-elite-purple" />
+            <span>{time}</span>
+          </div>
+          <div className="flex items-center">
+            <MapPin className="h-4 w-4 mr-2 text-elite-purple" />
+            <span className="line-clamp-1">{location}</span>
+          </div>
+        </div>
+
+        {/* Availability indicator */}
+        <div className="mt-4">
+          <div className="flex justify-between text-sm mb-1">
+            <span>Availability</span>
+            <span>{capacity - bookedSeats} seats left</span>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-2">
+            <div
+              className="bg-elite-purple h-2 rounded-full"
+              style={{ width: `${availabilityPercentage}%` }}
+            ></div>
+          </div>
+        </div>
+      </CardContent>
+
+      {/* Card footer with price and button */}
+      <CardFooter className="border-t pt-4 flex justify-between items-center">
+        <div className="font-bold">₹{price.toLocaleString()}</div>
+        <Button
+          asChild
+          size="sm"
+          className="bg-elite-purple hover:bg-elite-darkPurple transition-colors"
+        >
+          <Link to={`/events/${id}`}>View Details</Link>
         </Button>
-        <Button type="submit">
-          {isEditing ? 'Update Event' : 'Create Event'}
-        </Button>
-      </div>
-    </form>
+      </CardFooter>
+    </Card>
   );
 };
 
-export default EventForm;
+export default EventCard;

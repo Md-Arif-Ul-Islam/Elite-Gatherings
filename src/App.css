@@ -1,43 +1,52 @@
+/* Style the root container */
 #root {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
+  max-width: 1280px; /* Limit the maximum width of the content */
+  margin: 0 auto; /* Center the container horizontally */
+  padding: 2rem; /* Add padding around the content */
+  text-align: center; /* Center align text inside the container */
+}
+
+/* Style for logo images */
+.logo {
+  height: 6em; /* Set the logo height */
+  padding: 1.5em; /* Add spacing around the logo */
+  will-change: filter; /* Hint for performance optimization */
+  transition: filter 300ms; /* Smooth transition when filter changes */
+}
+
+/* Drop shadow effect on logo hover */
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa); /* Blue-ish glow on hover */
+}
+
+/* Drop shadow for React logo on hover */
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa); /* React blue glow on hover */
+}
+
+/* Keyframes for spinning animation */
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg); /* Start from 0 degrees */
   }
-  
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
+  to {
+    transform: rotate(360deg); /* Complete one full rotation */
   }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+/* Apply spin animation if user has no preference for reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear; /* Spin continuously every 20 seconds */
   }
-  .logo.react:hover {
-    filter: drop-shadow(0 0 2em #61dafbaa);
-  }
-  
-  @keyframes logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  
-  @media (prefers-reduced-motion: no-preference) {
-    a:nth-of-type(2) .logo {
-      animation: logo-spin infinite 20s linear;
-    }
-  }
-  
-  .card {
-    padding: 2em;
-  }
-  
-  .read-the-docs {
-    color: #888;
-  }
-  
+}
+
+/* Style for card components */
+.card {
+  padding: 2em; /* Add padding inside the card */
+}
+
+/* Style for doc info text */
+.read-the-docs {
+  color: #888; /* Light gray text color */
+}

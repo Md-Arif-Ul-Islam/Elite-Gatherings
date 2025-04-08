@@ -1,13 +1,19 @@
+// Import React module
 import * as React from "react"
 
+// Import types for toast props and actions
 import type {
   ToastActionElement,
   ToastProps,
 } from "@/components/ui/toast"
 
+// Maximum number of toasts displayed at once
 const TOAST_LIMIT = 1
+
+// Delay before removing toast after dismissal (in ms)
 const TOAST_REMOVE_DELAY = 1000000
 
+// Toast type with optional UI elements
 type ToasterToast = ToastProps & {
   id: string
   title?: React.ReactNode
@@ -15,6 +21,7 @@ type ToasterToast = ToastProps & {
   action?: ToastActionElement
 }
 
+// Define toast action types
 const actionTypes = {
   ADD_TOAST: "ADD_TOAST",
   UPDATE_TOAST: "UPDATE_TOAST",
@@ -22,15 +29,17 @@ const actionTypes = {
   REMOVE_TOAST: "REMOVE_TOAST",
 } as const
 
+// Generate unique toast ID
 let count = 0
-
 function genId() {
   count = (count + 1) % Number.MAX_SAFE_INTEGER
   return count.toString()
 }
 
+// Toast reducer action types
 type ActionType = typeof actionTypes
 
+// Toast reducer action shape
 type Action =
   | {
       type: ActionType["ADD_TOAST"]
@@ -49,12 +58,15 @@ type Action =
       toastId?: ToasterToast["id"]
     }
 
+// Toast reducer state shape
 interface State {
   toasts: ToasterToast[]
 }
 
+// Timeout map to track scheduled removals
 const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>()
 
+// Add toast ID to delayed removal queue
 const addToRemoveQueue = (toastId: string) => {
   if (toastTimeouts.has(toastId)) {
     return
@@ -71,6 +83,7 @@ const addToRemoveQueue = (toastId: string) => {
   toastTimeouts.set(toastId, timeout)
 }
 
+// Reducer function to manage toast state
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "ADD_TOAST":
@@ -90,8 +103,7 @@ export const reducer = (state: State, action: Action): State => {
     case "DISMISS_TOAST": {
       const { toastId } = action
 
-      // ! Side effects ! - This could be extracted into a dismissToast() action,
-      // but I'll keep it here for simplicity
+      // Schedule toast for removal
       if (toastId) {
         addToRemoveQueue(toastId)
       } else {
@@ -104,14 +116,12 @@ export const reducer = (state: State, action: Action): State => {
         ...state,
         toasts: state.toasts.map((t) =>
           t.id === toastId || toastId === undefined
-            ? {
-                ...t,
-                open: false,
-              }
+            ? { ...t, open: false }
             : t
         ),
       }
     }
+
     case "REMOVE_TOAST":
       if (action.toastId === undefined) {
         return {
@@ -126,10 +136,13 @@ export const reducer = (state: State, action: Action): State => {
   }
 }
 
+// Listeners for global toast state changes
 const listeners: Array<(state: State) => void> = []
 
+// Global memory state for toasts
 let memoryState: State = { toasts: [] }
 
+// Dispatch function to update toast state
 function dispatch(action: Action) {
   memoryState = reducer(memoryState, action)
   listeners.forEach((listener) => {
@@ -137,8 +150,10 @@ function dispatch(action: Action) {
   })
 }
 
+// Simplified toast type
 type Toast = Omit<ToasterToast, "id">
 
+// Create a new toast
 function toast({ ...props }: Toast) {
   const id = genId()
 
@@ -147,7 +162,9 @@ function toast({ ...props }: Toast) {
       type: "UPDATE_TOAST",
       toast: { ...props, id },
     })
-  const dismiss = () => dispatch({ type: "DISMISS_TOAST", toastId: id })
+
+  const dismiss = () =>
+    dispatch({ type: "DISMISS_TOAST", toastId: id })
 
   dispatch({
     type: "ADD_TOAST",
@@ -168,6 +185,7 @@ function toast({ ...props }: Toast) {
   }
 }
 
+// Hook to access and subscribe to toast state
 function useToast() {
   const [state, setState] = React.useState<State>(memoryState)
 
@@ -184,8 +202,10 @@ function useToast() {
   return {
     ...state,
     toast,
-    dismiss: (toastId?: string) => dispatch({ type: "DISMISS_TOAST", toastId }),
+    dismiss: (toastId?: string) =>
+      dispatch({ type: "DISMISS_TOAST", toastId }),
   }
 }
 
+// Export toast creation and hook
 export { useToast, toast }

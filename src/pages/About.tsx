@@ -1,13 +1,23 @@
+// Import React module
+import React from 'react'
 
-import React from 'react';
-import MainLayout from '@/layouts/MainLayout';
-import { Check, Users, Calendar, Award, MapPin, Phone, Mail, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+// Import main layout
+import MainLayout from '@/layouts/MainLayout'
 
+// Import icons
+import { Check, Users, Calendar, Award, MapPin, Phone, Mail, ArrowRight } from 'lucide-react'
+
+// Import UI button component
+import { Button } from '@/components/ui/button'
+
+// Import router link component
+import { Link } from 'react-router-dom'
+
+// About page component
 const About = () => {
   return (
     <MainLayout>
+
       {/* Hero Section */}
       <section className="py-16 bg-accent">
         <div className="container mx-auto px-4">
@@ -20,25 +30,25 @@ const About = () => {
         </div>
       </section>
 
-      {/* Our Story */}
+      {/* Our Story Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold mb-6">Our Story</h2>
               <p className="text-muted-foreground mb-4">
-                Elite Gatherings was founded in 2010 with a simple mission: to transform ordinary events into extraordinary experiences. What began as a small team of passionate event planners has grown into a full-service event management company with a reputation for excellence.
+                Elite Gatherings was founded in 2010 with a simple mission: to transform ordinary events into extraordinary experiences.
               </p>
               <p className="text-muted-foreground mb-4">
-                Our journey has been marked by creativity, innovation, and a relentless commitment to exceeding client expectations. We've had the privilege of organizing over 1,000 successful events across diverse categories, from intimate weddings to large-scale corporate conferences.
+                Our journey has been marked by creativity, innovation, and a relentless commitment to exceeding client expectations.
               </p>
               <p className="text-muted-foreground">
-                Today, Elite Gatherings stands as a leader in the event management industry, known for our attention to detail, personalized approach, and ability to bring creative visions to life.
+                Today, Elite Gatherings stands as a leader in the event management industry.
               </p>
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg">
               <img 
-                src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" 
+                src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1169&q=80" 
                 alt="Team working together" 
                 className="w-full h-full object-cover"
               />
@@ -47,38 +57,24 @@ const About = () => {
         </div>
       </section>
 
-      {/* Our Values */}
+      {/* Our Values Section */}
       <section className="py-16 bg-slate-50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">Our Core Values</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-lg shadow-sm">
-              <div className="w-12 h-12 bg-elite-purple/10 rounded-full flex items-center justify-center mb-4">
-                <Check className="h-6 w-6 text-elite-purple" />
+            {["Excellence", "Creativity", "Integrity"].map((value, index) => (
+              <div key={index} className="bg-white p-8 rounded-lg shadow-sm">
+                <div className="w-12 h-12 bg-elite-purple/10 rounded-full flex items-center justify-center mb-4">
+                  <Check className="h-6 w-6 text-elite-purple" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">{value}</h3>
+                <p className="text-muted-foreground">
+                  {value === "Excellence" && "We strive for excellence in every aspect of our service."}
+                  {value === "Creativity" && "We bring innovative ideas to make your event unique."}
+                  {value === "Integrity" && "We operate with transparency and ethical practices."}
+                </p>
               </div>
-              <h3 className="text-xl font-semibold mb-3">Excellence</h3>
-              <p className="text-muted-foreground">
-                We strive for excellence in every aspect of our service, from the initial consultation to the final execution of your event.
-              </p>
-            </div>
-            <div className="bg-white p-8 rounded-lg shadow-sm">
-              <div className="w-12 h-12 bg-elite-purple/10 rounded-full flex items-center justify-center mb-4">
-                <Check className="h-6 w-6 text-elite-purple" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Creativity</h3>
-              <p className="text-muted-foreground">
-                We bring innovative ideas and creative solutions to make your event unique and memorable.
-              </p>
-            </div>
-            <div className="bg-white p-8 rounded-lg shadow-sm">
-              <div className="w-12 h-12 bg-elite-purple/10 rounded-full flex items-center justify-center mb-4">
-                <Check className="h-6 w-6 text-elite-purple" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Integrity</h3>
-              <p className="text-muted-foreground">
-                We operate with transparency, honesty, and ethical practices in all our business dealings.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -92,16 +88,32 @@ const About = () => {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { name: "S M Zafor Abbasi", role: "Founder & CEO", image: "https://media.licdn.com/dms/image/v2/D5603AQFVGzSFf9HYpw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1719895637770?e=1749686400&v=beta&t=CCngKIkZCFFEZbkOgPbTiqlueZ5p7u_60xHZy9nvFYA" },
-              { name: "Rezaul Khan", role: "Creative Director", image: "https://media.licdn.com/dms/image/v2/D4D03AQEDpvd2lfBXQg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1671337295464?e=1749686400&v=beta&t=EfiCdFpY_rIJN9WmQs5WhIupfmPb0qDxgVCiT0Xnrpg" },
-              { name: "Mukaddim Hossain", role: "Event Coordinator", image: "https://media.licdn.com/dms/image/v2/D4D03AQFnWhD7eyq4SQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1732781722448?e=1749686400&v=beta&t=CAH8DAq4n_DE00yC3hD1dlM8Ato2H9yWcSKusBhNHVg" },
-              { name: "Md Arif Ul Islam", role: "Technical Director", image: "https://media.licdn.com/dms/image/v2/D4D03AQHiE8sz8hf4SQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1707549556441?e=1749686400&v=beta&t=JKfgYI-hHTg-I0nDi777OypYWTitTEPOP_OXGBDnZL0" }
+              {
+                name: "S M Zafor Abbasi",
+                role: "Founder & CEO",
+                image: "https://media.licdn.com/dms/image/v2/D5603AQFVGzSFf9HYpw/profile-displayphoto-shrink_400_400/0/1719895637770"
+              },
+              {
+                name: "Rezaul Khan",
+                role: "Creative Director",
+                image: "https://media.licdn.com/dms/image/v2/D4D03AQEDpvd2lfBXQg/profile-displayphoto-shrink_400_400/0/1671337295464"
+              },
+              {
+                name: "Mukaddim Hossain",
+                role: "Event Coordinator",
+                image: "https://media.licdn.com/dms/image/v2/D4D03AQFnWhD7eyq4SQ/profile-displayphoto-shrink_400_400/0/1732781722448"
+              },
+              {
+                name: "Md Arif Ul Islam",
+                role: "Technical Director",
+                image: "https://media.licdn.com/dms/image/v2/D4D03AQHiE8sz8hf4SQ/profile-displayphoto-shrink_400_400/0/1707549556441"
+              }
             ].map((member, index) => (
               <div key={index} className="text-center hover-scale">
                 <div className="rounded-full overflow-hidden w-32 h-32 mx-auto mb-4">
                   <img 
-                    src={member.image} 
-                    alt={member.name} 
+                    src={member.image}
+                    alt={member.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -113,7 +125,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Stats */}
+      {/* Stats Section */}
       <section className="py-16 bg-elite-purple text-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -137,7 +149,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Contact CTA */}
+      {/* Contact CTA Section */}
       <section className="py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Plan Your Next Event?</h2>
@@ -151,8 +163,10 @@ const About = () => {
           </Button>
         </div>
       </section>
-    </MainLayout>
-  );
-};
 
-export default About;
+    </MainLayout>
+  )
+}
+
+// Export About page component
+export default About

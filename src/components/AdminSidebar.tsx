@@ -1,6 +1,8 @@
-
+// Import React and React Router utilities
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+
+// Import icons from Lucide
 import {
   BarChart3,
   CalendarDays,
@@ -11,6 +13,8 @@ import {
   Settings,
   Users,
 } from 'lucide-react';
+
+// Import sidebar UI components
 import {
   Sidebar,
   SidebarContent,
@@ -23,25 +27,34 @@ import {
   SidebarGroupContent,
 } from '@/components/ui/sidebar';
 
+// Define the AdminSidebar component
 const AdminSidebar = () => {
+  // Get the current route location
   const location = useLocation();
-  
+
+  // Check if the provided path is currently active
   const isActive = (path: string) => {
     return location.pathname === path;
   };
 
+  // Render the sidebar with grouped navigation items
   return (
     <Sidebar>
+      {/* Sidebar Header with logo or title */}
       <SidebarHeader className="flex items-center">
         <Link to="/admin" className="flex items-center pl-2">
           <h3 className="text-xl font-bold text-elite-purple">Elite Gatherings</h3>
         </Link>
       </SidebarHeader>
+
+      {/* Sidebar Content */}
       <SidebarContent>
+        {/* Management Section */}
         <SidebarGroup>
           <SidebarGroupLabel>Management</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
+              {/* Dashboard */}
               <SidebarMenuItem>
                 <SidebarMenuButton isActive={isActive('/admin')}>
                   <Link to="/admin" className="flex items-center gap-2">
@@ -50,6 +63,8 @@ const AdminSidebar = () => {
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
+
+              {/* Events */}
               <SidebarMenuItem>
                 <SidebarMenuButton isActive={isActive('/admin/events')}>
                   <Link to="/admin/events" className="flex items-center gap-2">
@@ -58,6 +73,8 @@ const AdminSidebar = () => {
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
+
+              {/* Bookings */}
               <SidebarMenuItem>
                 <SidebarMenuButton isActive={isActive('/admin/bookings')}>
                   <Link to="/admin/bookings" className="flex items-center gap-2">
@@ -66,6 +83,8 @@ const AdminSidebar = () => {
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
+
+              {/* Users */}
               <SidebarMenuItem>
                 <SidebarMenuButton isActive={isActive('/admin/users')}>
                   <Link to="/admin/users" className="flex items-center gap-2">
@@ -77,11 +96,13 @@ const AdminSidebar = () => {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        
+
+        {/* Analytics Section */}
         <SidebarGroup className="mt-8">
           <SidebarGroupLabel>Analytics</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
+              {/* Reports */}
               <SidebarMenuItem>
                 <SidebarMenuButton isActive={isActive('/admin/reports')}>
                   <Link to="/admin/reports" className="flex items-center gap-2">
@@ -90,6 +111,8 @@ const AdminSidebar = () => {
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
+
+              {/* Revenue */}
               <SidebarMenuItem>
                 <SidebarMenuButton isActive={isActive('/admin/revenue')}>
                   <Link to="/admin/revenue" className="flex items-center gap-2">
@@ -101,11 +124,13 @@ const AdminSidebar = () => {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        
+
+        {/* System Section */}
         <SidebarGroup className="mt-8">
           <SidebarGroupLabel>System</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
+              {/* Settings */}
               <SidebarMenuItem>
                 <SidebarMenuButton isActive={isActive('/admin/settings')}>
                   <Link to="/admin/settings" className="flex items-center gap-2">
@@ -114,6 +139,8 @@ const AdminSidebar = () => {
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
+
+              {/* Back to Site */}
               <SidebarMenuItem>
                 <SidebarMenuButton>
                   <Link to="/" className="flex items-center gap-2">
@@ -130,4 +157,5 @@ const AdminSidebar = () => {
   );
 };
 
+// Export the AdminSidebar component
 export default AdminSidebar;

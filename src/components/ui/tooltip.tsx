@@ -1,14 +1,20 @@
+// Import React and Radix UI Tooltip primitive
 import * as React from "react"
 import * as TooltipPrimitive from "@radix-ui/react-tooltip"
 
+// Import utility function for conditional class names
 import { cn } from "@/lib/utils"
 
+// Re-export TooltipProvider from Radix
 const TooltipProvider = TooltipPrimitive.Provider
 
+// Re-export Tooltip root component
 const Tooltip = TooltipPrimitive.Root
 
+// Re-export Tooltip trigger component
 const TooltipTrigger = TooltipPrimitive.Trigger
 
+// Create TooltipContent component with custom styling and animation
 const TooltipContent = React.forwardRef<
   React.ElementRef<typeof TooltipPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
@@ -23,6 +29,8 @@ const TooltipContent = React.forwardRef<
     {...props}
   />
 ))
+
 TooltipContent.displayName = TooltipPrimitive.Content.displayName
 
+// Export all custom tooltip components
 export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }

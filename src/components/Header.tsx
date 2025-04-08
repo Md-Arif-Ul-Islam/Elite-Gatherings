@@ -1,8 +1,14 @@
-
+// Import React and necessary hooks
 import React, { useState } from 'react';
+
+// Import routing and icon components
 import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
 import { Menu, X, Calendar } from 'lucide-react';
+
+// Import custom Button component
+import { Button } from '@/components/ui/button';
+
+// Import Navigation Menu UI components (not used in this file)
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,22 +18,27 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 
+// Define and export the Header component
 const Header: React.FC = () => {
+  // State for mobile menu toggle
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Function to toggle mobile menu visibility
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   return (
+    // Header wrapper with border, sticky positioning, and background
     <header className="w-full border-b sticky top-0 bg-background z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        {/* Logo and branding */}
         <Link to="/" className="flex items-center">
           <Calendar className="h-6 w-6 text-elite-purple mr-2" />
           <h1 className="text-2xl font-bold text-elite-purple">Elite Gatherings</h1>
         </Link>
-        
-        {/* Desktop Navigation with Hover Effects */}
+
+        {/* Desktop navigation menu */}
         <nav className="hidden md:flex items-center space-x-6">
           <Link 
             to="/events" 
@@ -47,6 +58,8 @@ const Header: React.FC = () => {
           >
             Contact
           </Link>
+
+          {/* Desktop login/register buttons */}
           <div className="flex items-center space-x-2">
             <Button variant="outline" asChild className="hover:bg-elite-purple hover:text-white transition-colors">
               <Link to="/login">Login</Link>
@@ -57,7 +70,7 @@ const Header: React.FC = () => {
           </div>
         </nav>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile menu toggle button */}
         <button 
           onClick={toggleMenu}
           className="md:hidden text-foreground p-2"
@@ -67,7 +80,7 @@ const Header: React.FC = () => {
         </button>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile navigation menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-background">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
@@ -92,6 +105,8 @@ const Header: React.FC = () => {
             >
               Contact
             </Link>
+
+            {/* Mobile login/register buttons */}
             <div className="flex flex-col space-y-2 pt-2">
               <Button variant="outline" asChild className="w-full hover:bg-elite-purple hover:text-white transition-colors">
                 <Link to="/login" onClick={toggleMenu}>Login</Link>

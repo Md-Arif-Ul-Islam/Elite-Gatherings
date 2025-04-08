@@ -1,11 +1,17 @@
+// Import theme hook from next-themes
 import { useTheme } from "next-themes"
+// Import Sonner Toaster component
 import { Toaster as Sonner } from "sonner"
 
+// Define type for Toaster props
 type ToasterProps = React.ComponentProps<typeof Sonner>
 
+// Create a Toaster component
 const Toaster = ({ ...props }: ToasterProps) => {
+  // Get current theme or fallback to system
   const { theme = "system" } = useTheme()
 
+  // Return the styled Sonner component with dynamic theme and toast styles
   return (
     <Sonner
       theme={theme as ToasterProps["theme"]}
@@ -26,4 +32,5 @@ const Toaster = ({ ...props }: ToasterProps) => {
   )
 }
 
+// Export the Toaster component
 export { Toaster }

@@ -1,10 +1,14 @@
+// Import necessary React tools
 import * as React from "react"
 
+// Import utility for conditional class names
 import { cn } from "@/lib/utils"
 
+// Define props for the Textarea component extending default textarea props
 export interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
+// Create the Textarea component with forwarded ref
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, ...props }, ref) => {
     return (
@@ -19,6 +23,9 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     )
   }
 )
+
+// Set display name for better debugging
 Textarea.displayName = "Textarea"
 
+// Export the Textarea component
 export { Textarea }

@@ -1,4 +1,7 @@
+// Import custom toast hook
 import { useToast } from "@/hooks/use-toast"
+
+// Import toast UI components
 import {
   Toast,
   ToastClose,
@@ -8,9 +11,12 @@ import {
   ToastViewport,
 } from "@/components/ui/toast"
 
+// Define the Toaster component
 export function Toaster() {
+  // Access current toasts from custom hook
   const { toasts } = useToast()
 
+  // Render all active toasts inside the provider
   return (
     <ToastProvider>
       {toasts.map(function ({ id, title, description, action, ...props }) {
