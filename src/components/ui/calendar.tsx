@@ -1,64 +1,90 @@
+// Import React
 import * as React from "react";
+
+// Chevron icons for navigation buttons
 import { ChevronLeft, ChevronRight } from "lucide-react";
+
+// Calendar component from 'react-day-picker'
 import { DayPicker } from "react-day-picker";
 
+// Utility function to combine class names conditionally
 import { cn } from "@/lib/utils";
+
+// Reusing button styles for calendar controls
 import { buttonVariants } from "@/components/ui/button";
 
+// Define CalendarProps using all props accepted by DayPicker
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
+// Define the Calendar component
 function Calendar({
-  className,
-  classNames,
-  showOutsideDays = true,
-  ...props
+  className,        // Custom className for container
+  classNames,       // Custom classNames to override calendar parts
+  showOutsideDays = true, // Show trailing/leading days from other months
+  ...props          // Other DayPicker props
 }: CalendarProps) {
   return (
     <DayPicker
-      showOutsideDays={showOutsideDays}
-      className={cn("p-3", className)}
+      showOutsideDays={showOutsideDays} // Enable showing outside days
+      className={cn("p-3", className)}  // Apply default + custom padding
       classNames={{
+        // Layout of months
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
+        // Single month layout
         month: "space-y-4",
+        // Header wrapper
         caption: "flex justify-center pt-1 relative items-center",
+        // Current month label
         caption_label: "text-sm font-medium",
+        // Navigation container (prev/next)
         nav: "space-x-1 flex items-center",
+        // Styles for nav buttons
         nav_button: cn(
           buttonVariants({ variant: "outline" }),
           "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100"
         ),
+        // Positioning for prev/next nav buttons
         nav_button_previous: "absolute left-1",
         nav_button_next: "absolute right-1",
+        // Calendar table structure
         table: "w-full border-collapse space-y-1",
+        // Header row (day labels)
         head_row: "flex",
-        head_cell:
-          "text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]",
+        // Header cell (Sun, Mon, etc.)
+        head_cell: "text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]",
+        // Date row
         row: "flex w-full mt-2",
+        // Individual day cell
         cell: "h-9 w-9 text-center text-sm p-0 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
+        // Style for day buttons
         day: cn(
           buttonVariants({ variant: "ghost" }),
           "h-9 w-9 p-0 font-normal aria-selected:opacity-100"
         ),
+        // Styles for different day states
         day_range_end: "day-range-end",
-        day_selected:
-          "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",
+        day_selected: "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",
         day_today: "bg-accent text-accent-foreground",
-        day_outside:
-          "day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30",
+        day_outside: "day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30",
         day_disabled: "text-muted-foreground opacity-50",
-        day_range_middle:
-          "aria-selected:bg-accent aria-selected:text-accent-foreground",
+        day_range_middle: "aria-selected:bg-accent aria-selected:text-accent-foreground",
         day_hidden: "invisible",
+        
+        // Spread any user-provided overrides
         ...classNames,
       }}
+      // Replace default icons with Lucide icons
       components={{
         IconLeft: ({ ..._props }) => <ChevronLeft className="h-4 w-4" />,
         IconRight: ({ ..._props }) => <ChevronRight className="h-4 w-4" />,
       }}
-      {...props}
+      {...props} // Spread other props like selected, onSelect, etc.
     />
   );
 }
+
+// Set display name for React DevTools
 Calendar.displayName = "Calendar";
 
+// Export Calendar component
 export { Calendar };

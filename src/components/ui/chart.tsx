@@ -1,11 +1,12 @@
+// Imports
 import * as React from "react"
 import * as RechartsPrimitive from "recharts"
+import { cn } from "@/lib/utils" // Utility for conditional classnames
 
-import { cn } from "@/lib/utils"
-
-// Format: { THEME_NAME: CSS_SELECTOR }
+// Theme class mappings for light/dark mode
 const THEMES = { light: "", dark: ".dark" } as const
 
+// ChartConfig type defines label/icon and optional color or theme-specific color
 export type ChartConfig = {
   [k in string]: {
     label?: React.ReactNode
@@ -16,22 +17,23 @@ export type ChartConfig = {
   )
 }
 
+// Context definition for ChartConfig
 type ChartContextProps = {
   config: ChartConfig
 }
 
 const ChartContext = React.createContext<ChartContextProps | null>(null)
 
+// Hook to access chart context
 function useChart() {
   const context = React.useContext(ChartContext)
-
   if (!context) {
     throw new Error("useChart must be used within a <ChartContainer />")
   }
-
   return context
 }
 
+// Chart container with styling and context provider
 const ChartContainer = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> & {
@@ -50,12 +52,15 @@ const ChartContainer = React.forwardRef<
         data-chart={chartId}
         ref={ref}
         className={cn(
+          // Base styles for recharts elements
           "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none",
           className
         )}
         {...props}
       >
+        {/* Dynamically injects theme-aware chart styles */}
         <ChartStyle id={chartId} config={config} />
+        {/* Main chart rendering container */}
         <RechartsPrimitive.ResponsiveContainer>
           {children}
         </RechartsPrimitive.ResponsiveContainer>
@@ -65,6 +70,7 @@ const ChartContainer = React.forwardRef<
 })
 ChartContainer.displayName = "Chart"
 
+// Injects theme-based CSS custom properties based on chart config
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   const colorConfig = Object.entries(config).filter(
     ([_, config]) => config.theme || config.color
@@ -98,8 +104,10 @@ ${colorConfig
   )
 }
 
+// Re-export default Tooltip
 const ChartTooltip = RechartsPrimitive.Tooltip
 
+// Custom tooltip content with formatting, icons, indicators, etc.
 const ChartTooltipContent = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
@@ -131,14 +139,13 @@ const ChartTooltipContent = React.forwardRef<
   ) => {
     const { config } = useChart()
 
+    // Memoize label to avoid unnecessary recalculations
     const tooltipLabel = React.useMemo(() => {
-      if (hideLabel || !payload?.length) {
-        return null
-      }
-
+      if (hideLabel || !payload?.length) return null
       const [item] = payload
       const key = `${labelKey || item.dataKey || item.name || "value"}`
       const itemConfig = getPayloadConfigFromPayload(config, item, key)
+
       const value =
         !labelKey && typeof label === "string"
           ? config[label as keyof typeof config]?.label || label
@@ -152,10 +159,7 @@ const ChartTooltipContent = React.forwardRef<
         )
       }
 
-      if (!value) {
-        return null
-      }
-
+      if (!value) return null
       return <div className={cn("font-medium", labelClassName)}>{value}</div>
     }, [
       label,
@@ -167,9 +171,7 @@ const ChartTooltipContent = React.forwardRef<
       labelKey,
     ])
 
-    if (!active || !payload?.length) {
-      return null
-    }
+    if (!active || !payload?.length) return null
 
     const nestLabel = payload.length === 1 && indicator !== "dot"
 
@@ -196,10 +198,12 @@ const ChartTooltipContent = React.forwardRef<
                   indicator === "dot" && "items-center"
                 )}
               >
+                {/* Custom formatter support */}
                 {formatter && item?.value !== undefined && item.name ? (
                   formatter(item.value, item.name, item, index, item.payload)
                 ) : (
                   <>
+                    {/* Custom icon or indicator */}
                     {itemConfig?.icon ? (
                       <itemConfig.icon />
                     ) : (
@@ -254,8 +258,10 @@ const ChartTooltipContent = React.forwardRef<
 )
 ChartTooltipContent.displayName = "ChartTooltip"
 
+// Re-export default Legend
 const ChartLegend = RechartsPrimitive.Legend
 
+// Custom Legend content with icon/label support
 const ChartLegendContent = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> &
@@ -314,15 +320,13 @@ const ChartLegendContent = React.forwardRef<
 )
 ChartLegendContent.displayName = "ChartLegend"
 
-// Helper to extract item config from a payload.
+// Helper function to extract config using flexible matching
 function getPayloadConfigFromPayload(
   config: ChartConfig,
   payload: unknown,
   key: string
 ) {
-  if (typeof payload !== "object" || payload === null) {
-    return undefined
-  }
+  if (typeof payload !== "object" || payload === null) return undefined
 
   const payloadPayload =
     "payload" in payload &&
@@ -333,6 +337,7 @@ function getPayloadConfigFromPayload(
 
   let configLabelKey: string = key
 
+  // Try to extract more precise key if available in payload
   if (
     key in payload &&
     typeof payload[key as keyof typeof payload] === "string"
@@ -353,6 +358,7 @@ function getPayloadConfigFromPayload(
     : config[key as keyof typeof config]
 }
 
+// Exports
 export {
   ChartContainer,
   ChartTooltip,
