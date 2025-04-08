@@ -73,8 +73,8 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
       
       <CardFooter className="border-t pt-4 flex justify-between items-center">
         <div className="flex items-center">
-          <DollarSign className="h-4 w-4 text-elite-purple" />
-          <span className="font-bold">${price.toLocaleString()}</span>
+          {/* <DollarSign className="h-4 w-4 text-elite-purple" /> */}
+          <span className="font-bold">₹{price.toLocaleString()}</span>
         </div>
         <Button 
           asChild 

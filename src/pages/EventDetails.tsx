@@ -297,7 +297,7 @@ const EventDetails = () => {
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div 
                     className="bg-elite-purple h-2 rounded-full" 
-                    style={{ width: `${(remainingSeats / event.capacity) * 100}%` }}
+                    style={{ width: `₹{(remainingSeats / event.capacity) * 100}%` }}
                   ></div>
                 </div>
                 {remainingSeats < 10 && (

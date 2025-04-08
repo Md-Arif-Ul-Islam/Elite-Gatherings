@@ -55,7 +55,7 @@ const EventForm: React.FC<EventFormProps> = ({ isEditing = false, onSubmit }) =>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <Label htmlFor="price">Price ($)</Label>
+            <Label htmlFor="price">Price (₹)</Label>
             <Input id="price" type="number" min="0" step="0.01" placeholder="0.00" required />
           </div>
           <div>
