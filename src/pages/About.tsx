@@ -92,10 +92,10 @@ const About = () => {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { name: "Sarah Johnson", role: "Founder & CEO", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
-              { name: "Michael Chen", role: "Creative Director", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
-              { name: "Emily Rodriguez", role: "Event Coordinator", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80" },
-              { name: "David Kim", role: "Technical Director", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" }
+              { name: "Dr. Aniruddha Deka", role: "Founder & CEO", image: "https://media.licdn.com/dms/image/v2/D4D03AQGPTVXIdqiuZw/profile-displayphoto-shrink_800_800/B4DZXymHkWHIAg-/0/1743531837651?e=1749686400&v=beta&t=i1jM0hzpXhYF5jwGvpdbqSCeqI26gVEnRkIvcej3iC8" },
+              { name: "S M Zafor Abbasi", role: "Creative Director", image: "https://media.licdn.com/dms/image/v2/D5603AQFVGzSFf9HYpw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1719895637791?e=1749686400&v=beta&t=ZT7h3Rx21LOUZWXbSlwyat09PAG-W4kEnjzCThwQcuM" },
+              { name: "Sneha Saha", role: "Event Coordinator", image: "https://media.licdn.com/dms/image/v2/D4D03AQHvfbjxpELtkg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1721504061651?e=1749686400&v=beta&t=z9CE6z7oodiPjCzuLTgeIvuw8Rvz2Fbj6R5ZjVAD700" },
+              { name: "Md Arif Ul Islam", role: "Technical Director", image: "https://media.licdn.com/dms/image/v2/D4D03AQHiE8sz8hf4SQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1707549556441?e=1749686400&v=beta&t=JKfgYI-hHTg-I0nDi777OypYWTitTEPOP_OXGBDnZL0" }
             ].map((member, index) => (
               <div key={index} className="text-center hover-scale">
                 <div className="rounded-full overflow-hidden w-32 h-32 mx-auto mb-4">

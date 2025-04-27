@@ -46,7 +46,7 @@ const Contact = () => {
                     <MapPin className="h-5 w-5 text-elite-purple mr-4 mt-0.5" />
                     <div>
                       <h3 className="font-semibold mb-1">Our Office</h3>
-                      <p className="text-muted-foreground">123 Event Plaza, New York, NY 10001</p>
+                      <p className="text-muted-foreground">Hatsingimari, South Salmara Mankachar,Assam - 783135</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -56,7 +56,7 @@ const Contact = () => {
                     <Phone className="h-5 w-5 text-elite-purple mr-4 mt-0.5" />
                     <div>
                       <h3 className="font-semibold mb-1">Phone</h3>
-                      <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                      <p className="text-muted-foreground">+91 9957428261 & +91 6002507274</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -66,7 +66,7 @@ const Contact = () => {
                     <Mail className="h-5 w-5 text-elite-purple mr-4 mt-0.5" />
                     <div>
                       <h3 className="font-semibold mb-1">Email</h3>
-                      <p className="text-muted-foreground">info@elitegatherings.com</p>
+                      <p className="text-muted-foreground">mdarifulislam.adtu@gmail.com</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -94,22 +94,22 @@ const Contact = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="firstName">First Name</Label>
-                        <Input id="firstName" placeholder="John" required />
+                        <Input id="firstName" placeholder="First Name" required />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="lastName">Last Name</Label>
-                        <Input id="lastName" placeholder="Doe" required />
+                        <Input id="lastName" placeholder="lastName" required />
                       </div>
                     </div>
                     
                     <div className="space-y-2">
                       <Label htmlFor="email">Email</Label>
-                      <Input id="email" type="email" placeholder="john.doe@example.com" required />
+                      <Input id="email" type="email" placeholder="Enter Your Email id here" required />
                     </div>
                     
                     <div className="space-y-2">
                       <Label htmlFor="phone">Phone</Label>
-                      <Input id="phone" placeholder="+1 (___) ___-____" />
+                      <Input id="phone" placeholder="+91____________________" />
                     </div>
                     
                     <div className="space-y-2">
@@ -144,7 +144,7 @@ const Contact = () => {
         <div className="container mx-auto px-4">
           <div className="rounded-lg overflow-hidden h-96 shadow-md">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830936557!2d-74.11976383964463!3d40.69766374865766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1683659303612!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3579.8426379911907!2d91.8614645!3d26.2017968!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x375af77400000001%3A0xfa44ca580f29ec15!2sAssam%20down%20town%20University!5e0!3m2!1sen!2sin!4v1744614869185!5m2!1sen!2sin"
               className="w-full h-full"
               style={{ border: 0 }}
               allowFullScreen

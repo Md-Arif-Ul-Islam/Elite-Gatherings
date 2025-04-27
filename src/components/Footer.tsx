@@ -139,15 +139,15 @@ const Footer: React.FC = () => {
             <div className="space-y-3">
               <div className="flex items-start">
                 <MapPin size={18} className="mr-2 mt-1 flex-shrink-0" />
-                <p className="text-gray-300">123 Event Plaza, New York, NY 10001</p>
+                <p className="text-gray-300">Hatsingimari, South Salmara Mankachar,Assam - 783135</p>
               </div>
               <div className="flex items-center">
                 <Phone size={18} className="mr-2 flex-shrink-0" />
-                <p className="text-gray-300">+1 (555) 123-4567</p>
+                <p className="text-gray-300">+91 9957428261 & +91 6002507274</p>
               </div>
               <div className="flex items-center">
                 <Mail size={18} className="mr-2 flex-shrink-0" />
-                <p className="text-gray-300">info@elitegatherings.com</p>
+                <p className="text-gray-300">mdarifulislam.adtu@gmail.com</p>
               </div>
             </div>
           </div>
@@ -155,7 +155,7 @@ const Footer: React.FC = () => {
         
         <div className="mt-12 pt-6 border-t border-gray-700">
           <p className="text-center text-gray-300 text-sm">
-            &copy; {new Date().getFullYear()} Elite Gatherings. All rights reserved.
+            &copy; {new Date().getFullYear()} Elite Gatherings. All rights reserved to S M Zafor Abbasi & Md Arif Ul Islam.
           </p>
         </div>
       </div>

@@ -11,6 +11,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import axios from 'axios';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,6 +19,7 @@ const Header: React.FC = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+ 
 
   return (
     <header className="w-full border-b sticky top-0 bg-background z-50">
@@ -54,6 +56,7 @@ const Header: React.FC = () => {
             <Button asChild className="bg-elite-purple hover:bg-elite-darkPurple transition-colors">
               <Link to="/register">Register</Link>
             </Button>
+          
           </div>
         </nav>
 
@@ -98,7 +101,9 @@ const Header: React.FC = () => {
               </Button>
               <Button asChild className="w-full bg-elite-purple hover:bg-elite-darkPurple transition-colors">
                 <Link to="/register" onClick={toggleMenu}>Register</Link>
+                Register
               </Button>
+              
             </div>
           </div>
         </div>

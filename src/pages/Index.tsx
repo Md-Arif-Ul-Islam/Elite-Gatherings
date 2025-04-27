@@ -1,5 +1,4 @@
-
-import React from 'react';
+import axios from 'axios';
 import MainLayout from '@/layouts/MainLayout';
 import HeroSection from '@/components/HeroSection';
 import FeaturedEvents from '@/components/FeaturedEvents';
@@ -9,6 +8,8 @@ import { Link } from 'react-router-dom';
 import { categories } from '@/utils/mockData';
 
 const Index = () => {
+
+
   return (
     <MainLayout>
       {/* Hero Section */}
