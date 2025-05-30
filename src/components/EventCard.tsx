@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Event } from '@/utils/mockData';
 import { Link } from 'react-router-dom';
-import { Calendar, MapPin, Clock, DollarSign } from 'lucide-react';
+import { Calendar, MapPin, Clock, IndianRupee } from 'lucide-react';
 
 interface EventCardProps {
   event: Event;
@@ -73,8 +73,8 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
       
       <CardFooter className="border-t pt-4 flex justify-between items-center">
         <div className="flex items-center">
-          <DollarSign className="h-4 w-4 text-elite-purple" />
-          <span className="font-bold">${price.toLocaleString()}</span>
+          <IndianRupee className="h-4 w-4 text-elite-purple" />
+          <span className="font-bold">{price.toLocaleString()}</span>
         </div>
         <Button 
           asChild 
